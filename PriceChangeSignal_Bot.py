@@ -21,7 +21,7 @@ logging.basicConfig(
 # Your bot token from the BotFather
 BOT_TOKEN = "BOT_TOKEN"
 
-# OAuth Token
+# OAuth Token from Bitquery
 OAUTH_TOKEN = "OAUTH_TOKEN"
 
 # Function to split long text into smaller parts
@@ -172,9 +172,7 @@ async def send_query_and_process(update: Update, context: ContextTypes.DEFAULT_T
                         current_price = float(item['Trade'].get('end') or 0.0)
                         start_price = float(item['Trade'].get('start') or 0.0)
                         item['price_change_1hr'] = calculate_percentage_change(start_price, current_price)
-
-
-                    # Sort data by price change in descending order
+                        
                     # Sort data by price change in descending order
                     sorted_data = sorted(
                         solana_data,
@@ -286,7 +284,7 @@ async def start_regular_requests(update: Update, context: ContextTypes.DEFAULT_T
 
 # Command handler to start the regular requests
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Starting regular requests every 4 minutes...")
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Starting regular requests every 30 minutes...")
     asyncio.create_task(start_regular_requests(update, context))
 
 # Main function to set up the Telegram bot
